@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+    <style>
+        li {
+            border: 1px dashed #333;
+            margin: 10px;
+            padding: 5px;
+            font-size: 13px;
+            /* width: 100% */
+        }
+        
+        .v-enter,
+        .v-leave-to {
+            opacity: 0;
+            transform: translateY(80px);
+        }
+        
+        .v-enter-active,
+        .v-leave-active {
+            transition: all .6s ease;
+        }
+        
+        li:hover {
+            background-color: hotpink;
+            transition: all .4s ease;
+        }
+        
+        .v-move {
+            transition: all .6s ease;
+        }
+        
+        .v-leave-active {
+            position: absolute;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+
+        <div>
+            <label for="">
+                Id:
+                <input type="text" v-model="id">
+            </label>
+            <label for="">
+                Name:
+                <input type="text" v-model="name">
+            </label>
+            <input type="button" value="add" @click="add">
+        </div>
+
+        <ul>
+            <!-- 实现列表过度的时候，如果需要过度的元素, 是通过v-for 循环渲染出来的不能使用tansition 包裹 而使用transitionGroup -->
+            <!-- 如果要为v-for 循环创建的元素设置动画, 必须为每个元素 绑定key属性 -->
+            <!-- appear属性 初始化的时候的过度效果 -->
+            <!-- transition-group默认会显示成<span>标签 可以用tag="div" 换为其他元素 -->
+            <transition-group>
+                <li v-for="(item, index) in list" :key="item.id" @click="del(index)">
+                    {{ item.id }} -- {{ item.name }}
+                </li>
+            </transition-group>
+        </ul>
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                id: "",
+                name: "",
+                list: [{
+                    id: 1,
+                    name: "乾隆"
+                }, {
+                    id: 2,
+                    name: "嘉庆"
+                }, {
+                    id: 3,
+                    name: "雍正"
+                }, {
+                    id: 4,
+                    name: "康熙"
+                }]
+            },
+            methods: {
+                add() {
+                    this.list.push({
+                        id: this.id,
+                        name: this.name
+                    });
+                },
+                del(index) {
+                    this.list.splice(index, 1);
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

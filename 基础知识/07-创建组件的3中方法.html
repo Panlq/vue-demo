@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <my-temp> </my-temp>
+
+        <hr>
+
+        <mytemp></mytemp>
+
+        <hr>
+
+        <p is="mytemp2"></p>
+    </div>
+
+
+    <!-- 方法3 可以在外部定义好模板在引用 -->
+    <template id="temp">
+        <div>
+            <h2>我么的天空</h2>
+            <h6>很烂 很蓝</h6>
+        </div>
+    </template>
+
+    <script>
+        // 方法1
+        const temp1 = Vue.extend({
+            template: "<h3>llfsdfsdfdsf </h3>"
+        });
+
+        Vue.component("myTemp", temp1);
+
+        // 方法2
+
+        Vue.component("mytemp", {
+            template: "<h3>我们士大夫大师傅士大夫s</h3>"
+        });
+
+        // 方法3
+
+        Vue.component("mytemp2", {
+            template: "#temp"
+        })
+
+        var vm = new Vue({
+            el: "#app",
+            data: {
+
+            }
+        })
+    </script>
+</body>
+
+</html>

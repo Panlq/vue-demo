@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+
+    <div id="app">
+        <mytemp></mytemp>
+        <hr>
+        <mytemp></mytemp>
+        <hr>
+        <mytemp></mytemp>
+    </div>
+
+    <template id="temp">
+        <div>
+            <input type="button" value="increment" @click="increment">
+            <h3> {{count}} </h3>
+        </div>
+    </template>
+
+    <script>
+        // 未来保证每个组件 数据的唯一性, 函数中的变量为局部变量, 互不影响
+        Vue.component("mytemp", {
+            template: "#temp",
+            data: function() {
+                return {
+                    count: 0
+                }
+            },
+            methods: {
+                increment() {
+                    this.count++;
+                }
+            }
+        })
+
+        var vm = new Vue({
+            el: "#app",
+            data: {}
+        })
+    </script>
+</body>
+
+</html>

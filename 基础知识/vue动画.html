@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+    <script src="../js/vue-resource.js"></script>
+    <style>
+        .v-enter,
+        .v-leave-to {
+            opacity: 0;
+            transform: translateX(20px);
+        }
+        
+        .v-enter-active,
+        .v-leave-active {
+            transition: all .4s ease;
+        }
+        
+        .bobo-enter,
+        .bobo-leave-to {
+            opacity: 0;
+            transform: translateX(-20px);
+        }
+        
+        .bobo-enter-active,
+        .bobo-leave-active {
+            transition: all .4s ease;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <input type="button" value="toggle" @click="flag=!flag">
+        <!-- 1.使用 transition 元素 把需要被动画控制的元素包裹起来 -->
+        <!-- 可参考:https://cn.vuejs.org/v2/guide/transitions.html -->
+        <transition>
+            <h3 v-if="flag">这是一个h3</h3>
+        </transition>
+
+        <hr>
+        <input type="button" value="toggle2" @click="flag2=!flag2">
+        <transition name="bobo">
+            <h3 v-if="flag2">这是一个h3</h3>
+        </transition>
+
+
+        <hr>
+        <input type="button" value="toggle3" @click="flag3=!flag3">
+        <transition name="bobo" :duration="3000">
+            <h3 v-if="flag3">这是一个h3</h3>
+        </transition>
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                flag: true,
+                flag2: true,
+                flag3: true
+            }
+        })
+    </script>
+</body>
+
+</html>
