@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./js/vue.js"></script>
+    <link rel="stylesheet" href="./css/bootstrap-3.3.7/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div id="app">
+        <input type="button" value="修改msg" @click="msg='no'">
+        <h3 id="h3"> {{msg}} </h3>
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                msg: "ok"
+            },
+            methods: {
+                show() {
+                    console.log(this.msg);
+                }
+            },
+            beforeCreate() {
+                // beforeCreate   data和methods 都还没初始化
+                // this.show();
+                console.log(this.msg);
+            },
+            created() {
+                //
+            },
+            beforeMount() {
+                // 挂载前, 模板已经编译好，并加载到内存中了,  但是模板还没挂载到DOM中,所以返回的字符串
+                console.log(document.getElementById("h3").innerHTML);
+            },
+            mounted() {
+                // 虚拟DOM已经替换到真实的DOM中了
+                console.log(document.getElementById("h3").innerHTML);
+            },
+            // 运行期间执行的两个函数
+            beforeUpdate() {
+                console.log("界面上的数据" + document.getElementById("h3").innerText);
+                console.log("data中的数据" + this.msg);
+            },
+            updated() {
+                // 同步虚拟DOM --> 真实DOM
+                // data(Model) -> view()
+                console.log("界面上的数据" + document.getElementById("h3").innerText);
+                console.log("data中的数据" + this.msg);
+            },
+            beforeDestroy() {
+                // 当执行
+                console.log("界面上的数据" + document.getElementById("h3").innerText);
+                console.log("data中的数据" + this.msg);
+            },
+            destroyed() {
+                // 实例已经被销毁， 所有数据,指令,过滤器都被销毁
+            }
+        })
+    </script>
+</body>
+
+</html>
